@@ -100,6 +100,11 @@ int main(int argc, char** argv) {
     float* hB = (float*)malloc(bytes);
     float* hC = (float*)malloc(bytes);
     float* hRef = (float*)malloc(bytes);
+    if (!hA || !hB || !hC || !hRef) {
+        fprintf(stderr, "Host allocation failed for N = %d (%zu bytes each)\n",
+                N, bytes);
+        return EXIT_FAILURE;
+    }
 
     for (int i = 0; i < N * N; ++i) {
         hA[i] = (float)(rand() % 10);
